@@ -1,10 +1,9 @@
 import {Router} from "express";
-import {loginResponse , principalResponse } from "../controllers/login.controller";
+import {viewLogin  } from "../controllers/login.controller";
 
 
 const loginRouter: Router = Router();
 
-loginRouter.get("/", loginResponse);
-loginRouter.get("/perfil", principalResponse);
+loginRouter.get("/", viewLogin);
 
 export default loginRouter;
