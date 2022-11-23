@@ -1,0 +1,27 @@
+/*.back {
+        background: #2d1463;;
+        position: absolute;
+    }*/
+
+html,
+body {
+    background-color: #f50057;
+}
+
+img {
+    top: 10%;
+    left: 5%;
+    position: relative;
+
+}
+
+.ancho{
+    height: 450px;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
