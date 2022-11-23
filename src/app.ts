@@ -4,6 +4,8 @@ import path from "path"
 import dotenv from "dotenv";
 dotenv.config();
 
+import expressSession from "./middlewares/express-session.middleware";
+
 import loginRouter from "./routes/login.router";
 import registerRouter from "./routes/registro.route";
 import principalRouter from "./routes/principal.route";
@@ -31,6 +33,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,'./public')))
+app.use(expressSession);
 
 //routes
 app.use("/", loginRouter);

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { InfanteModel } from "../models/infante.model";
 
 //Vista
 export function viewLogin(req: Request, res: Response) {
@@ -7,3 +8,4 @@ export function viewLogin(req: Request, res: Response) {
 }
 
 //Insertar
+
