@@ -1,0 +1,35 @@
+    .col-sm-4 {
+        text-align: center;
+    }
+
+    .col-sm-4 p {
+        font-size: 20px;
+    }
+
+    .col-sm-8 {
+        text-align: center;
+    }
+
+    .col-sm-8 p {
+        text-align: center;
+        font-size: 25px;
+    }
+
+    .col-sm-8 button {
+        margin: 40px;
+    }
+
+    .btn-group button {
+        font-size: 25px;
+        border-radius: 100px;
+    }
+
+    .container-fluid h1 {
+        text-align: center;
+        font-size: 50px;
+    }
+
+    .container-fluid p {
+        text-align: center;
+        font-size: 30px;
+    }

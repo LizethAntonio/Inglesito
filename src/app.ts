@@ -10,6 +10,9 @@ import loginRouter from "./routes/login.router";
 import registerRouter from "./routes/registro.route";
 import principalRouter from "./routes/principal.route";
 import verificacionRouter from "./routes/veri.route";
+import principianteRouter from "./routes/principiante.route";
+import principiante2Router from "./routes/principiante2.route";
+import principiante3Router from "./routes/principiante3.route";
 
 //import exampleRouter from "./routes/example.route";
 //import exampleV2Router from "./routes/example.v2.route";
@@ -40,6 +43,9 @@ app.use("/", loginRouter);
 app.use("/", registerRouter);
 app.use("/", principalRouter);
 app.use("/", verificacionRouter);
+app.use("/", principianteRouter);
+app.use("/", principiante2Router);
+app.use("/", principiante3Router);
 
 /*app.use("/api/v1/example",exampleRouter);
 app.use("/api/v2/example",exampleV2Router);
