@@ -1,2 +1,2 @@
-# NodeJS TS Configuración basica#
-# INGLESITO #
+# NodeJS TS Configuración basica
+INGLESITO 
