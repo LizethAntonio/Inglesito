@@ -8,8 +8,8 @@ import expressSession from "./middlewares/express-session.middleware";
 
 import loginRouter from "./routes/login.router";
 import registerRouter from "./routes/registro.route";
+import modificarRoute from "./routes/modificar.route";
 import principalRouter from "./routes/principal.route";
-import verificacionRouter from "./routes/veri.route";
 import principianteRouter from "./routes/principiante.route";
 import principiante2Router from "./routes/principiante2.route";
 import principiante3Router from "./routes/principiante3.route";
@@ -22,7 +22,7 @@ const app: Application = express();
 
 
 //settings
-app.set("port", process.env.PORT || 4000);
+app.set("port", process.env.PORT || 4001);
 app.set("view engine","ejs");
 app.set('views', path.join(__dirname, './views'));
 app.set("conector", "php");
@@ -41,8 +41,8 @@ app.use(expressSession);
 //routes
 app.use("/", loginRouter);
 app.use("/", registerRouter);
+app.use("/", modificarRoute);
 app.use("/", principalRouter);
-app.use("/", verificacionRouter);
 app.use("/", principianteRouter);
 app.use("/", principiante2Router);
 app.use("/", principiante3Router);

@@ -1,8 +1,38 @@
 .back-img {
     /*background-color: #2d1463;*/
-    background-image: url(/assets/img/chapulin.png);
+    background-image:
+    url(/assets/img/chapulin.png);
+    background-repeat : round;
+    background-size : 350px 350px;
+    
 }
 
 .ancho {
-   height: 1000px;
+   height: 900px;
+   width: 650px;
+}
+
+.cont{
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 2%);
+}
+
+.color{
+   
+    background-image:
+    url(/assets/img/estrellas.png);
+    background-repeat : space;
+    background-size : 20px 20px;
+    
+}
+
+h2{
+    font-family: lobster;
+    color: #f50057;
+}
+
+p{
+    font-family: lobster;
 }
