@@ -4,11 +4,13 @@ import path from "path"
 import dotenv from "dotenv";
 dotenv.config();
 
-import expressSession from "./middlewares/express-session.middleware";
+import {sessionConfig, sessionMiddleware} from "./middlewares/express-session.middleware";
+
 
 import loginRouter from "./routes/login.router";
 import registerRouter from "./routes/registro.route";
 import modificarRoute from "./routes/modificar.route";
+import fileRoute from "./routes/file.route";
 import principalRouter from "./routes/principal.route";
 import principianteRouter from "./routes/principiante.route";
 import principiante2Router from "./routes/principiante2.route";
@@ -36,10 +38,12 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,'./public')))
-app.use(expressSession);
+app.use(sessionConfig);
+app.use(sessionMiddleware);
 
 //routes
 app.use("/", loginRouter);
+app.use("/api/v1/file", fileRoute);
 app.use("/", registerRouter);
 app.use("/", modificarRoute);
 app.use("/", principalRouter);
