@@ -30,13 +30,15 @@ InfanteModel.init(
       type: DataTypes.STRING(30),
       allowNull: false,
     },
-    nombreUsuario: {
-      type: DataTypes.STRING(30),
-      allowNull: false,
-    },
     correo: {
-      type: DataTypes.STRING(30),
+      type: DataTypes.STRING(100),
       allowNull: false,
+      unique: { name: "uCorreoUsuario", msg: "Correo Anteriormente Registrado" },
+      validate: {
+        isEmail: {
+          msg: "no es un correo",
+        },
+      },
     },
     contrasenia: {
       type: DataTypes.STRING(200),

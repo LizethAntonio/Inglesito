@@ -4,7 +4,6 @@ export default interface InfanteType {
   apellidoP?: string;
   apellidoM?: string;
   nacimiento?: string;
-  nombreUsuario?: string;
   correo?: string;
   contrasenia?: string;
   idNivel?: number;
