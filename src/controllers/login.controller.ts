@@ -1,28 +1,30 @@
 import { Request, Response } from "express";
 import { isValidPassword } from "../libraries/bycript.library";
+import { hashPassword } from "../libraries/bycript.library";
 import { InfanteModel } from "../models/infante.model";
 
 //Vista
 export function viewLogin(req: Request, res: Response) {
   const {error} = req.query;
+  const data = { title: "Programacion web" };
   return res.render("infante/login-view", {error});
 }
 
-export async function loginInfante(req: Request, res: Response) {
+export async function logginUsuario(req: Request, res: Response) {
+  
   try {
     const { body } = req;
-    const { correo, contrasenia } = req.body;
-    const infanteResponse = await InfanteModel.findOne({
-      attributes: ["idInfante","nombre","apellidoP","apellidoM","nacimiento", "nombreUsuario","correo", "contrasenia","idNivel"],
+    const { correo, contrasenia } = body;
+    const usuarioResponse = await InfanteModel.findOne({
+      attributes: ["idInfante", "nombreUsuario", "correo", "contrasenia"],
       where: { correo }
     });
-    if (infanteResponse !== null) {
-      const contraseniaUsuario = infanteResponse.getDataValue(contrasenia);
+    if (usuarioResponse !== null) {
+      const contraseniaUsuario = usuarioResponse.getDataValue(contrasenia);
       if (isValidPassword(contrasenia, contraseniaUsuario)) {
-        const user = infanteResponse.toJSON();
+        const user = usuarioResponse.toJSON();
+        delete user.contrasenia;
         req.session.user = user;
-        console.log("YA ENTRÉ A LA SESIÓN");
-       
         //return res.status(StatusCodes.OK).json(user);
         return res.redirect("/");
       }
@@ -45,11 +47,74 @@ export async function readUsuario(req: Request, res: Response) {
   res.status(200).json(infantes);
 }
 
+/*export async function createProducto(req: Request, res: Response) {
+  try {
+    const { body, file } = req;
+    body["url_imagen"] = file?.path;
+    const productResponse = await ProductoModel.create(body, { raw: true });
+    res.status(201).json(productResponse);
+  } catch (error) {
+    console.log(error);
+  }
+}*/
 
 export async function updateInfante(req: Request, res: Response) {
-  const {correo} = req.params;
+  const {idInfante} = req.params;
   const {body} = req;
-  const entity = await InfanteModel.findByPk(correo);
+  const entity = await InfanteModel.findByPk(idInfante);
   await entity?.update(body);
   res.status(201).json(entity?.toJSON());
+}
+
+export async function deleteProducto(req: Request, res: Response) {
+  const {idInfante} = req.params;
+  const entity = await InfanteModel.findByPk(idInfante);
+  await entity?.destroy();
+  res.status(204).json({ok:""});
+}
+
+
+
+//hipo agregue un metodo para la autentificacion del usuario
+export async function auth(req: Request, res: Response) {
+  try {
+    const { body } = req;
+    const { correo, contrasenia } = body;
+    const usuarioResponse = await InfanteModel.findOne({
+      attributes: ["idInfante", "correo", "contrasenia"],
+      where: { correo }
+    });
+    if (usuarioResponse !== null) {
+      const contraseniaUsuario: string = usuarioResponse.getDataValue("contrasenia")!;
+      if (isValidPassword(contrasenia, contraseniaUsuario)) {
+        const user = usuarioResponse.toJSON();
+        delete user.contrasenia;
+        req.session.user = user;
+        //return res.status(StatusCodes.OK).json(user);
+        return res.redirect("/viewform-principal");
+      }else{
+        res.send("error: contraseña incorrecta");
+      }
+    }else{
+      res.send("error: usuario no encontrado");
+    }
+
+    //res.redirect("/api/v1/loggin/signin?error=1");
+    //res.render("/",{error: error});
+    res.send("error: "+"Ocurrio un error");
+
+  } catch (error) {
+    res.send("error: "+error);
+  }
+
+}
+
+export async function logout(req: Request, res: Response){
+  console.log("entro en el logaur")
+  req.session.destroy((err)=>{
+    if(err){
+      console.log("error al cerrar sesion");
+    }
+    res.redirect("/");
+  });
 }
