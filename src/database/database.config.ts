@@ -12,9 +12,9 @@ export const sequelize = new Sequelize( DB_LINK, {//DB_NAME, DB_USER, DB_PASSWOR
   dialect: DB_DIALECT,
   dialectOptions: {
     encrypt: true,
-    //ssl: {
-    //  rejectUnauthorized: false,
-    //},
+    ssl: {
+     rejectUnauthorized: false,
+    },
   },
   logging:false
 });
